@@ -1,0 +1,911 @@
+{
+	"info": {
+		"_postman_id": "a4264ab0-ef97-42b1-8a1d-b3850279020e",
+		"name": "Davra Training",
+		"description": "A collection of requests used to demo the Davra API capabilities.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18670897"
+	},
+	"item": [
+		{
+			"name": "Devices API",
+			"item": [
+				{
+					"name": "Get All Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/devices?limit=100",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"devices"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Device by UUID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/devices/c979864f-098b-489f-a477-9d62094b4aee",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"devices",
+								"c979864f-098b-489f-a477-9d62094b4aee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"stevedemotest\",\n    \"serialNumber\": \"stevedemotest\",\n    \"deviceType\": \"raspberrypi\",\n    \"labels\": {\n        \"train\": \"\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/devices",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Device",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"labels\": {\n        \"train\": \"UUID\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/devices/c979864f-098b-489f-a477-9d62094b4aee",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"devices",
+								"c979864f-098b-489f-a477-9d62094b4aee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Device Attributes",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"make\": \"demo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/devices/c979864f-098b-489f-a477-9d62094b4aee/attributes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"devices",
+								"c979864f-098b-489f-a477-9d62094b4aee",
+								"attributes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/devices/c979864f-098b-489f-a477-9d62094b4aee",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"devices",
+								"c979864f-098b-489f-a477-9d62094b4aee"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Digital Twin Types API",
+			"item": [
+				{
+					"name": "Get All Digital Twin Types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/twintypes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"twintypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Digital Twin Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/twintypes/2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"twintypes",
+								"2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Digital Twin Type",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"train\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/twintypes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"twintypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Digital Twin Type",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customAttributes\": {\n        \"createdBy\": \"Steve Martin\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/twintypes/2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"twintypes",
+								"2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Twin Type",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/twintypes/2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"twintypes",
+								"2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Digital Twins API",
+			"item": [
+				{
+					"name": "Get All Digital Twins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/twins",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"twins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Twin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/twins/03ef64a4-d01d-4b23-ace6-96a6fc5aada4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"twins",
+								"03ef64a4-d01d-4b23-ace6-96a6fc5aada4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Digital Twin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"ore train\",\n    \"digitalTwinType\": \"56fc274b-d36c-46dc-b7f6-9f7a0126ef38\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/twins",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"twins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Digital Twin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customAttributes\": {\n        \"createdBy\": \"Steve Martin\",\n        \"conductor\": \"Steve Martin\",\n        \"carts\": 4\n    },\n    \"labels\": {\n        \"make\": \"\",\n        \"models\": \"\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/twins/03ef64a4-d01d-4b23-ace6-96a6fc5aada4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"twins",
+								"03ef64a4-d01d-4b23-ace6-96a6fc5aada4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Digital Twin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/twins/03ef64a4-d01d-4b23-ace6-96a6fc5aada4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"twins",
+								"03ef64a4-d01d-4b23-ace6-96a6fc5aada4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Metrics",
+			"item": [
+				{
+					"name": "Get All Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/iotdata/meta-data/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"iotdata",
+								"meta-data",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Metric",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"weight\",\n    \"label\": \"Weight\",\n    \"description\": \"The weight of the train in kilograms\",\n    \"units\": \"kg\",\n    \"labels\": {\n        \"project\": \"demo\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/iotdata/meta-data",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"iotdata",
+								"meta-data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Metric",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"The weight of the ore on a train in Kilograms\",\n    \"units\": \"kg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/iotdata/meta-data/weight",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"iotdata",
+								"meta-data",
+								"weight"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Metric",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/iotdata/meta-data/weight",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"iotdata",
+								"meta-data",
+								"weight"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Iotdata and Timeseries API",
+			"item": [
+				{
+					"name": "Push IoT Data",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"UUID\": \"2d293d01-3735-47da-be3d-8bd80463b2c3\",\n        \"name\": \"weight\",\n        \"msg_type\": \"datum\",\n        \"value\": 1500\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/iotdata",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"iotdata"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query Metrics",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"metrics\": [\n        {\n            \"name\": \"weight\",\n            \"limit\": 1000,\n            \"exclude_tags\": true\n        }\n    ],\n    \"start_relative\": {\n        \"value\": \"12\",\n        \"unit\": \"hours\"\n    },\n    \"end_relative\": {\n        \"value\": \"1\",\n        \"unit\": \"minutes\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v2/timeseriesdata",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"timeseriesdata"
+							]
+						},
+						"description": "For More Info on building timeseries queries take a look at the KairosDB documentation - [https://kairosdb.github.io/docs/restapi/index.html](https://kairosdb.github.io/docs/restapi/index.html)"
+					},
+					"response": []
+				},
+				{
+					"name": "Query Metrics - Sum values",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"metrics\": [\n        {\n            \"name\": \"weight\",\n            \"limit\": 1000,\n            \"exclude_tags\": true,\n            \"group_by\": [\n                {\n                    \"name\": \"tag\",\n                    \"tags\": [\n                        \"UUID\"\n                    ]\n                }\n            ],\n            \"aggregators\": [\n                {\n                    \"name\": \"sum\",\n                    \"align_sampling\": true,\n                    \"sampling\": {\n                        \"value\": 12,\n                        \"unit\": \"hours\"\n                    }\n                }\n            ]\n        }\n    ],\n    \"start_relative\": {\n        \"value\": \"12\",\n        \"unit\": \"hours\"\n    },\n    \"end_relative\": {\n        \"value\": \"1\",\n        \"unit\": \"minutes\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v2/timeseriesdata",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"timeseriesdata"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Alert",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"now\", Date.now());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UUID\": \"dae192d3-8320-48a0-b909-7758fa725804\",\n  \"timestamp\": {{now}},\n  \"latitude\": 54,\n  \"longitude\": -7.5,\n  \"name\": \"davranetworks.alarm\",\n  \"msg_type\": \"event\",\n  \"value\": {\n    \"severity\": \"CRITICAL\",\n    \"message\": \"Asset breached geofence at 10.00 am, Tuesday 24 March\",\n    \"config\": {\n      \"name\": \"My Alarm 1\",\n      \"instructions\": \"Stop vehicle and return to garage\",\n      \"description\": \"\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/iotdata",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"iotdata"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v2/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v2/users/1904dcd4f880438eae676da3ebf46a2e",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users",
+								"1904dcd4f880438eae676da3ebf46a2e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"smartin\",\n    \"displayName\": \"Steve Martin\",\n    \"phoneNumber\": \"\",\n    \"requiresVerificationCode\": false,\n    \"roles\": [],\n    \"labels\": {\n        \"Customer\": \"Davra\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v2/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roles\": [\"4d1af821-36e8-49ca-83f9-a6725dd6c40e\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v2/users/1904dcd4f880438eae676da3ebf46a2e",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users",
+								"1904dcd4f880438eae676da3ebf46a2e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v2/users/4d1af821-36e8-49ca-83f9-a6725dd6c40e",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"users",
+								"4d1af821-36e8-49ca-83f9-a6725dd6c40e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Get All Roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/authorization/roles",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authorization",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Role",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/authorization/roles/25c009d7-daf0-4c77-ac10-71aada191f60",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authorization",
+								"roles",
+								"25c009d7-daf0-4c77-ac10-71aada191f60"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"TrainOperator\",\n  \"policy\": {\n    \"Statement\": [\n      {\n        \"Effect\": \"Allow\",\n        \"Action\": [\n          \"devices.ACCESS\"\n        ]\n      }\n    ]\n  },\n  \"labels\": {\n    \"Customer\": \"Davra\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/authorization/roles",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authorization",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policy\": {\n        \"Statement\": [\n            {\n                \"Effect\": \"Allow\",\n                \"Action\": [\n                    \"devices.ACCESS\",\n                    \"devices.CREATE_DEVICE\",\n                    \"twintypes.ACCESS\",\n                    \"twins.ACCESS\",\n                    \"twintypes.CREATE_TWINTYPE\",\n                    \"twins.CREATE_TWIN\"\n                ]\n            },\n            {\n                \"Effect\": \"Allow\",\n                \"Resource\": [\n                    \"devices/*\",\n                    \"twintypes/*\",\n                    \"twins/*\"\n                ],\n                \"Action\": [\n                    \"devices.VIEW\",\n                    \"twintypes.VIEW\",\n                    \"twins.VIEW\"\n                ],\n                \"Condition\": {\n                    \"ResourceLabel\": {}\n                }\n            },\n            {\n                \"Effect\": \"Allow\",\n                \"Resource\": [\n                    \"devices/*\",\n                    \"twintypes/*\",\n                    \"twins/*\"\n                ],\n                \"Action\": [\n                    \"devices.EDIT\",\n                    \"twintypes.EDIT\",\n                    \"twins.EDIT\"\n                ],\n                \"Condition\": {\n                    \"ResourceLabel\": {}\n                }\n            },\n            {\n                \"Effect\": \"Allow\",\n                \"Resource\": [\n                    \"devices/*\",\n                    \"twintypes/*\",\n                    \"twins/*\"\n                ],\n                \"Action\": [\n                    \"devices.DELETE\",\n                    \"twintypes.DELETE\",\n                    \"twins.DELETE\"\n                ],\n                \"Condition\": {\n                    \"ResourceLabel\": {}\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/authorization/roles/4d1af821-36e8-49ca-83f9-a6725dd6c40e",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authorization",
+								"roles",
+								"4d1af821-36e8-49ca-83f9-a6725dd6c40e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Role",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "0pLgbKstoZAX7wDLvnW0e5QkfHpvUYBrHkNog9xTGj3YNePd",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "https://fordlab.davra.com",
+			"type": "string"
+		}
+	]
+}

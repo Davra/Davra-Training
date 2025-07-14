@@ -1,0 +1,5 @@
+# Set the name for this application. No spaces, only aphanumeric.
+applicationName=sampleAppTrainingVm
+# Set the version for this application. No spaces, only aphanumeric and underscore.
+applicationVersion=1_1
+twinUUID=61d69e39-d0ab-4e83-bb7c-0d98299d233b

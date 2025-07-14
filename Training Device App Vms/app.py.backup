@@ -1,0 +1,174 @@
+# A Sample Device Application
+# This imports the Davra Device SDK
+# Which connects to the Davra Device Agent
+# and from there to the Davra server
+#
+import time
+from requests.auth import HTTPBasicAuth
+import json
+import davra_sdk as davraSdk
+import RPi.GPIO as GPIO
+
+# Configuration for the app should be available in config.txt.
+# It should contain the application name and version
+appConfig = davraSdk.loadAppConfiguration()
+
+GREEN_LED = 18
+RED_LED = 23
+BUZZER = 25
+FLASH_SPEED = 0.33
+
+
+def setupGPIO():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    GPIO.setup(GREEN_LED, GPIO.OUT)
+    GPIO.setup(RED_LED, GPIO.OUT)
+    GPIO.setup(BUZZER, GPIO.OUT)
+    GPIO.output(GREEN_LED, GPIO.LOW)
+    GPIO.output(RED_LED, GPIO.LOW)
+    GPIO.output(BUZZER, GPIO.LOW)
+
+
+def toggleLED(functionInfo):
+    try:
+        davraSdk.log("App received instruction to toggle an LED")
+        setupGPIO()
+        GPIO.output(GREEN_LED, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(GREEN_LED, GPIO.LOW)
+        GPIO.output(RED_LED, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(RED_LED, GPIO.LOW)
+
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+
+    davraSdk.sendMessageFromAppToAgent(
+        {
+            "finishedFunctionOnApp": functionInfo["functionName"],
+            "status": "completed",
+            "response": "complete",
+        }
+    )
+    return
+
+
+def triggerBuzzer(functionInfo):
+    try:
+        end_time = time.time() + 1
+        while time.time() < end_time:
+            GPIO.output(BUZZER, GPIO.HIGH)
+            time.sleep(1 / (2 * 400))
+            GPIO.output(BUZZER, GPIO.LOW)
+            time.sleep(1 / (2 * 400))
+    except KeyboardInterrupt:
+        GPIO.output(BUZZER, GPIO.low)
+
+    davraSdk.sendMessageFromAppToAgent(
+        {
+            "finishedFunctionOnApp": functionInfo["functionName"],
+            "status": "completed",
+            "response": "Alarm Sounded",
+        }
+    )
+    return
+
+
+def getProcessListing(functionInfo):
+    davraSdk.log("App received instruction to get process listing ")
+    s = davraSdk.runCommandWithTimeout("ps -ef ", 10)
+    davraSdk.sendMessageFromAppToAgent(
+        {
+            "finishedFunctionOnApp": functionInfo["functionName"],
+            "status": "completed",
+            "response": str(s[1]),
+        }
+    )
+    return
+
+
+# Just for demonstration purposes
+# A callback for when any message is seen on the comms channel from the agent.
+def onAnyMessageReceived(msg):
+    payload = str(msg.payload)
+    if davraSdk.isJson(payload) == False:
+        return
+    msg = json.loads(payload)
+    # Was this message from this app itself
+    if "fromApp" in msg and msg["fromApp"] == appConfig["applicationName"]:
+        return
+    else:
+        # Was this message from the Device Agent
+        if "fromAgent" in msg:
+            davraSdk.log("A message was received from Device Agent")
+    return
+
+
+###########################   MAIN LOOP
+
+if __name__ == "__main__":
+    davraSdk.log(
+        "Starting device application "
+        + appConfig["applicationName"]
+        + " "
+        + appConfig["applicationVersion"]
+    )
+
+    # Instruct the SDK to attach to the mqtt topic and call our function when a message is received
+    # Also inform the SDK of the name of this Device Application
+    davraSdk.connectToAgent(appConfig["applicationName"])
+    # Wait (for a max of timeout seconds) until the agent is available to communicate
+    davraSdk.waitUntilAgentIsConnected(600)
+
+    # Inform the Agent and Platform server that this application can do tasks on the device
+    davraSdk.registerCapability(
+        "agent-action-getProcessListing",
+        {
+            "functionParameters": {},
+            "functionLabel": "Get the list of processes running",
+            "functionDescription": "Get the list of processes running on the device",
+        },
+        getProcessListing,
+    )
+
+    # Register the LED toggle capability
+    davraSdk.registerCapability(
+        "agent-action-toggleLEDs",
+        {
+            "functionParameters": {},
+            "functionLabel": "Toggles Device LEDs",
+            "functionDescription": "Toggles 2 LEDs for 1 second each on the device",
+        },
+        toggleLED,
+    )
+
+    # Register the Buzzer capability
+    davraSdk.registerCapability(
+        "agent-action-triggerBuzzer",
+        {
+            "functionParameters": {},
+            "functionLabel": "Trigger Device Buzzer",
+            "functionDescription": "Triggers the device buzzer",
+        },
+        triggerBuzzer,
+    )
+
+    # Demonstration of how to listen to any communication on the device (the agent or other apps)
+    davraSdk.listenToAllMessagesFromAgent(onAnyMessageReceived)
+
+    # Demonstration of how to send a miscellaneous message to the agent
+    davraSdk.sendMessageFromAppToAgent({"message": "test from app"})
+
+    # Main loop to run forever.
+    countMainLoop = 0
+    while True:
+        # Only every n seconds
+        if countMainLoop % 60 == 0:
+            davraSdk.log("Application running: " + appConfig["applicationName"])
+        if countMainLoop % 30 == 0:
+            # Demonstration of sending a simple metric reading to the server
+            davraSdk.sendMetricValue("counter", countMainLoop)
+        countMainLoop += 1
+        time.sleep(1)
+# End Main loop
