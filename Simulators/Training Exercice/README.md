@@ -40,17 +40,17 @@ Open the `index.js` file and replace the following placeholders with your own va
 
 | Variable       | Description                                                    |
 |----------------|----------------------------------------------------------------|
-| USERNAME       | Your Davra platform username                        |
-| PASSWORD       | Your Davra platform password                        |
-| TENANT         | Your tenant name (subdomain) in the Davra URL                        |
+| USERNAME       | Your Davra platform username                                   |
+| PASSWORD       | Your Davra platform password                                   |
+| TENANT         | Your tenant name (subdomain) in the Davra URL                  |
 | DEVICE_UUID    | UUID of the device you created in Davra                        |
 | METRIC_NAME    | Your metric name (e.g., fb.engine.temperature_celsius)         |
 
 You'll find these placeholder lines near the top of the file:
 
 ```bash
-const USERNAME = "REPLACE_WITH_USERNAME";
-const PASSWORD = "REPLACE_WITH_PASSWORD";
+const USERNAME = "REPLACE_WITH_YOUR_USERNAME";
+const PASSWORD = "REPLACE_WITH_YOUR_PASSWORD";
 const TENANT = "REPLACE_WITH_YOUR_TENANT_NAME"; 
 const DEVICE_UUID = "REPLACE_WITH_YOUR_DEVICE_UUID";
 const METRIC_NAME = "REPLACE_WITH_YOUR_METRIC_NAME";

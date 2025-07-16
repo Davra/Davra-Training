@@ -11,12 +11,12 @@
  * - Set the METRIC_NAME to the appropriate metric name created in your platform.
  *
  * This script sends a random temperature value between 25°C and 35°C, with
- * occasional spikes between 40°C and 50°C to simulate overheating events.
+ * occasional spikes between 50°C and 60°C to simulate overheating events.
  */
 
 // === Configuration - REPLACE THESE VALUES ===
-const USERNAME = "REPLACE_WITH_USERNAME";
-const PASSWORD = "REPLACE_WITH_PASSWORD";
+const USERNAME = "REPLACE_WITH_YOUR_USERNAME";
+const PASSWORD = "REPLACE_WITH_YOUR_PASSWORD";
 const TENANT = "REPLACE_WITH_YOUR_TENANT_NAME";                 // e.g. training
 const DEVICE_UUID = "REPLACE_WITH_YOUR_DEVICE_UUID";
 const METRIC_NAME = "REPLACE_WITH_YOUR_METRIC_NAME";            // e.g. jd.engine.temperature_celsius
@@ -30,11 +30,11 @@ const SEND_INTERVAL_MS = 10 * 60 * 1000; // 10 minutes in milliseconds
 // Simulate temperature values with occasional spikes
 function simulateTemperature() {
   let temperature;
-  if (Math.random() < 0.10) {
-    // 10% chance: spike between 40–50°C
-    temperature = +(40 + Math.random() * 10).toFixed(1);
+  if (Math.random() < 0.20) {
+    // 20% chance: spike between 50–60°C
+    temperature = +(50 + Math.random() * 10).toFixed(1);
   } else {
-    // 90% chance: normal range 25–35°C
+    // 80% chance: normal range 25–35°C
     temperature = +(25 + Math.random() * 10).toFixed(1);
   }
   if (temperature >= 40) {
