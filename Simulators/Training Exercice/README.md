@@ -78,6 +78,14 @@ You can adjust the interval in the code if needed.
 docker build -t your-docker-hub-username/temp-simulator:latest .
 ```
 
+Davra’s platform requires Docker images to be built for the `linux/amd64` **(x86_64)** architecture.
+
+If you’re using a Mac with Apple Silicon (M1/M2), you **must** add the `--platform` flag when building your image:
+
+```bash
+docker build --platform linux/amd64 -t your-docker-hub-username/temp-simulator:latest .
+```
+
 ### 2. Push to Docker Hub
 
 ```bash
