@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "a4264ab0-ef97-42b1-8a1d-b3850279020e",
+		"_postman_id": "492b94d3-b340-489b-bb34-f19bd71fedaa",
 		"name": "Davra Training",
 		"description": "A collection of requests used to demo the Davra API capabilities.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "18670897"
+		"_exporter_id": "821751",
+		"_collection_link": "https://cloudy-moon-5416.postman.co/workspace/Davra-Training~5767c66b-c22b-4930-9b70-b125fb8bf32a/collection/821751-492b94d3-b340-489b-bb34-f19bd71fedaa?action=share&source=collection_link&creator=821751"
 	},
 	"item": [
 		{
@@ -41,7 +42,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/devices/c979864f-098b-489f-a477-9d62094b4aee",
+							"raw": "{{BASE_URL}}/api/v1/devices/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -49,7 +50,13 @@
 								"api",
 								"v1",
 								"devices",
-								"c979864f-098b-489f-a477-9d62094b4aee"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": "4ab3b0e3-3cd8-4abc-9f75-ced66388d675"
+								}
 							]
 						}
 					},
@@ -62,7 +69,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"stevedemotest\",\n    \"serialNumber\": \"stevedemotest\",\n    \"deviceType\": \"raspberrypi\",\n    \"labels\": {\n        \"train\": \"\"\n    }\n}",
+							"raw": "{\n    \"name\": \"JD_TempSensor\",\n    \"serialNumber\": \"SN_JD_TempSensor\",\n    \"deviceType\": \"sensor\",\n    \"labels\": {\n        \"location\": \"engine\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -90,7 +97,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"labels\": {\n        \"train\": \"UUID\"\n    }\n}",
+							"raw": "{\n    \"labels\": {\n        \"sensorClass\": \"engine-12\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -98,7 +105,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/devices/c979864f-098b-489f-a477-9d62094b4aee",
+							"raw": "{{BASE_URL}}/api/v1/devices/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -106,7 +113,13 @@
 								"api",
 								"v1",
 								"devices",
-								"c979864f-098b-489f-a477-9d62094b4aee"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -119,7 +132,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"make\": \"demo\"\n}",
+							"raw": "{\n    \"devCustomAttr1\": \"myCustomAttr\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -127,7 +140,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/devices/c979864f-098b-489f-a477-9d62094b4aee/attributes",
+							"raw": "{{BASE_URL}}/api/v1/devices/:UUID/attributes",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -135,8 +148,14 @@
 								"api",
 								"v1",
 								"devices",
-								"c979864f-098b-489f-a477-9d62094b4aee",
+								":UUID",
 								"attributes"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -148,7 +167,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/devices/c979864f-098b-489f-a477-9d62094b4aee",
+							"raw": "{{BASE_URL}}/api/v1/devices/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -156,7 +175,13 @@
 								"api",
 								"v1",
 								"devices",
-								"c979864f-098b-489f-a477-9d62094b4aee"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -192,7 +217,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/twintypes/2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457",
+							"raw": "{{BASE_URL}}/api/v1/twintypes/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -200,7 +225,13 @@
 								"api",
 								"v1",
 								"twintypes",
-								"2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": "f5974eb5-9c11-4736-af27-2493f96cccb2"
+								}
 							]
 						}
 					},
@@ -213,7 +244,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"train\"\n}",
+							"raw": "{\n    \"name\": \"JD_DumpTruck\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,10 +272,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"customAttributes\": {\n        \"createdBy\": \"Steve Martin\"\n    }\n}"
+							"raw": "{\n    \"customAttributes\": {\n        \"ownedBy\": \"Celtic Engineering\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/twintypes/2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457",
+							"raw": "{{BASE_URL}}/api/v1/twintypes/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -252,7 +283,13 @@
 								"api",
 								"v1",
 								"twintypes",
-								"2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -264,7 +301,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/twintypes/2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457",
+							"raw": "{{BASE_URL}}/api/v1/twintypes/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -272,7 +309,13 @@
 								"api",
 								"v1",
 								"twintypes",
-								"2c5d32e6-dcfa-4fc5-9d88-71e6d2ec5457"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -308,7 +351,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/twins/03ef64a4-d01d-4b23-ace6-96a6fc5aada4",
+							"raw": "{{BASE_URL}}/api/v1/twins/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -316,7 +359,13 @@
 								"api",
 								"v1",
 								"twins",
-								"03ef64a4-d01d-4b23-ace6-96a6fc5aada4"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -329,7 +378,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"ore train\",\n    \"digitalTwinType\": \"56fc274b-d36c-46dc-b7f6-9f7a0126ef38\"\n}",
+							"raw": "{\n    \"name\": \"JD_DumpTruck001\",\n    \"digitalTwinType\": \"56fc274b-d36c-46dc-b7f6-9f7a0126ef38\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -357,7 +406,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"customAttributes\": {\n        \"createdBy\": \"Steve Martin\",\n        \"conductor\": \"Steve Martin\",\n        \"carts\": 4\n    },\n    \"labels\": {\n        \"make\": \"\",\n        \"models\": \"\"\n    }\n}",
+							"raw": "{\n    \"customAttributes\": {\n        \"capacity\": \"231 tonnes\"\n    },\n    \"labels\": {\n        \"make\": \"Catepillar\",\n        \"model\": \"793\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -365,7 +414,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/twins/03ef64a4-d01d-4b23-ace6-96a6fc5aada4",
+							"raw": "{{BASE_URL}}/api/v1/twins/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -373,7 +422,13 @@
 								"api",
 								"v1",
 								"twins",
-								"03ef64a4-d01d-4b23-ace6-96a6fc5aada4"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -385,7 +440,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/twins/03ef64a4-d01d-4b23-ace6-96a6fc5aada4",
+							"raw": "{{BASE_URL}}/api/v1/twins/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -393,7 +448,13 @@
 								"api",
 								"v1",
 								"twins",
-								"03ef64a4-d01d-4b23-ace6-96a6fc5aada4"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -432,7 +493,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"weight\",\n    \"label\": \"Weight\",\n    \"description\": \"The weight of the train in kilograms\",\n    \"units\": \"kg\",\n    \"labels\": {\n        \"project\": \"demo\"\n    }\n}",
+							"raw": "{\n    \"name\": \"jd.engine.temperature_celsius\",\n    \"description\": \"Temperature reading from the dump truck's engine block. Used for monitoring operational status and detecting potential overheating conditions\",\n    \"units\": \"C\",\n    \"labels\": {\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -455,7 +516,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Metric",
+					"name": "???? Update Metric ????",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -469,7 +530,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/iotdata/meta-data/weight",
+							"raw": "{{BASE_URL}}/api/v1/iotdata/meta-data/:metricName",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -478,7 +539,13 @@
 								"v1",
 								"iotdata",
 								"meta-data",
-								"weight"
+								":metricName"
+							],
+							"variable": [
+								{
+									"key": "metricName",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -490,7 +557,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/iotdata/meta-data/weight",
+							"raw": "{{BASE_URL}}/api/v1/iotdata/meta-data/:metricName",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -499,7 +566,13 @@
 								"v1",
 								"iotdata",
 								"meta-data",
-								"weight"
+								":metricName"
+							],
+							"variable": [
+								{
+									"key": "metricName",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -517,7 +590,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    {\n        \"UUID\": \"2d293d01-3735-47da-be3d-8bd80463b2c3\",\n        \"name\": \"weight\",\n        \"msg_type\": \"datum\",\n        \"value\": 1500\n    }\n]",
+							"raw": "[\n    {\n        \"name\": \"jd.engine.temperature_celsius\",\n        \"msg_type\": \"datum\",\n        \"UUID\": \"2d293d01-3735-47da-be3d-8bd80463b2c3\",\n        \"value\": 88\n    }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -545,7 +618,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"metrics\": [\n        {\n            \"name\": \"weight\",\n            \"limit\": 1000,\n            \"exclude_tags\": true\n        }\n    ],\n    \"start_relative\": {\n        \"value\": \"12\",\n        \"unit\": \"hours\"\n    },\n    \"end_relative\": {\n        \"value\": \"1\",\n        \"unit\": \"minutes\"\n    }\n}",
+							"raw": "{\n    \"metrics\": [\n        {\n            \"name\": \"jd.engine.temperature_celsius\",\n            \"limit\": 1000,\n            \"exclude_tags\": true\n        }\n    ],\n    \"start_relative\": {\n        \"value\": \"12\",\n        \"unit\": \"hours\"\n    },\n    \"end_relative\": {\n        \"value\": \"1\",\n        \"unit\": \"minutes\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -574,7 +647,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"metrics\": [\n        {\n            \"name\": \"weight\",\n            \"limit\": 1000,\n            \"exclude_tags\": true,\n            \"group_by\": [\n                {\n                    \"name\": \"tag\",\n                    \"tags\": [\n                        \"UUID\"\n                    ]\n                }\n            ],\n            \"aggregators\": [\n                {\n                    \"name\": \"sum\",\n                    \"align_sampling\": true,\n                    \"sampling\": {\n                        \"value\": 12,\n                        \"unit\": \"hours\"\n                    }\n                }\n            ]\n        }\n    ],\n    \"start_relative\": {\n        \"value\": \"12\",\n        \"unit\": \"hours\"\n    },\n    \"end_relative\": {\n        \"value\": \"1\",\n        \"unit\": \"minutes\"\n    }\n}",
+							"raw": "{\n    \"metrics\": [\n        {\n            \"name\": \"jd.engine.temperature_celsius\",\n            \"limit\": 1000,\n            \"exclude_tags\": true,\n            \"group_by\": [\n                {\n                    \"name\": \"tag\",\n                    \"tags\": [\n                        \"UUID\"\n                    ]\n                }\n            ],\n            \"aggregators\": [\n                {\n                    \"name\": \"sum\",\n                    \"align_sampling\": true,\n                    \"sampling\": {\n                        \"value\": 12,\n                        \"unit\": \"hours\"\n                    }\n                }\n            ]\n        }\n    ],\n    \"start_relative\": {\n        \"value\": \"12\",\n        \"unit\": \"hours\"\n    },\n    \"end_relative\": {\n        \"value\": \"1\",\n        \"unit\": \"minutes\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -664,7 +737,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v2/users/1904dcd4f880438eae676da3ebf46a2e",
+							"raw": "{{BASE_URL}}/api/v2/users/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -672,7 +745,13 @@
 								"api",
 								"v2",
 								"users",
-								"1904dcd4f880438eae676da3ebf46a2e"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": "451e5a4868b3fd5bda206fc82e436ac3"
+								}
 							]
 						}
 					},
@@ -685,7 +764,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"smartin\",\n    \"displayName\": \"Steve Martin\",\n    \"phoneNumber\": \"\",\n    \"requiresVerificationCode\": false,\n    \"roles\": [],\n    \"labels\": {\n        \"Customer\": \"Davra\"\n    }\n}",
+							"raw": "{\n    \"name\": \"jd_user\",\n    \"displayName\": \"John Doe\",\n    \"phoneNumber\": \"123-445566\",\n    \"requiresVerificationCode\": false,\n    \"roles\": [],\n    \"labels\": {\n        \"customer\": \"Celtic Engineering\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -721,7 +800,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v2/users/1904dcd4f880438eae676da3ebf46a2e",
+							"raw": "{{BASE_URL}}/api/v2/users/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -729,7 +808,13 @@
 								"api",
 								"v2",
 								"users",
-								"1904dcd4f880438eae676da3ebf46a2e"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -741,7 +826,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v2/users/4d1af821-36e8-49ca-83f9-a6725dd6c40e",
+							"raw": "{{BASE_URL}}/api/v2/users/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -749,7 +834,13 @@
 								"api",
 								"v2",
 								"users",
-								"4d1af821-36e8-49ca-83f9-a6725dd6c40e"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -786,7 +877,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/authorization/roles/25c009d7-daf0-4c77-ac10-71aada191f60",
+							"raw": "{{BASE_URL}}/api/v1/authorization/roles/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -795,7 +886,13 @@
 								"v1",
 								"authorization",
 								"roles",
-								"25c009d7-daf0-4c77-ac10-71aada191f60"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": "e451090e-bdf9-43e5-adc6-497c665867d6"
+								}
 							]
 						}
 					},
@@ -808,7 +905,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"TrainOperator\",\n  \"policy\": {\n    \"Statement\": [\n      {\n        \"Effect\": \"Allow\",\n        \"Action\": [\n          \"devices.ACCESS\"\n        ]\n      }\n    ]\n  },\n  \"labels\": {\n    \"Customer\": \"Davra\"\n  }\n}",
+							"raw": "{\n  \"name\": \"TruckDriver\",\n  \"policy\": {\n    \"Statement\": [\n      {\n        \"Effect\": \"Allow\",\n        \"Action\": [\n          \"devices.ACCESS\"\n        ]\n      }\n    ]\n  },\n  \"labels\": {\n    \"customer\": \"Celtic Engineering\"\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -845,7 +942,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/authorization/roles/4d1af821-36e8-49ca-83f9-a6725dd6c40e",
+							"raw": "{{BASE_URL}}/api/v1/authorization/roles/:UUID",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -854,7 +951,13 @@
 								"v1",
 								"authorization",
 								"roles",
-								"4d1af821-36e8-49ca-83f9-a6725dd6c40e"
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -863,8 +966,166 @@
 				{
 					"name": "Delete Role",
 					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/authorization/roles/:UUID",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authorization",
+								"roles",
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Organisations",
+			"item": [
+				{
+					"name": "Get All Organisations",
+					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/organisations",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"organisations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Organisation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/organisations/:UUID",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"organisations",
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Organisation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": {{TRAINEE_ORG}},\n  \"description\": \"This a new organisation\",\n  \"labels\": {\n    \"customer\": \"Davra\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/organisations",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"organisations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Organisation",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"This a new updated description\",\n  \"customAttributes\": {\n    \"headquarters\": \"Dublin\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/organisations/:UUID",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"organisations",
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Organisation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/organisations/:UUID",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"organisations",
+								":UUID"
+							],
+							"variable": [
+								{
+									"key": "UUID",
+									"value": ""
+								}
+							]
+						}
 					},
 					"response": []
 				}
@@ -872,11 +1133,16 @@
 		}
 	],
 	"auth": {
-		"type": "bearer",
-		"bearer": [
+		"type": "basic",
+		"basic": [
 			{
-				"key": "token",
-				"value": "0pLgbKstoZAX7wDLvnW0e5QkfHpvUYBrHkNog9xTGj3YNePd",
+				"key": "password",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "",
 				"type": "string"
 			}
 		]
@@ -903,8 +1169,23 @@
 	],
 	"variable": [
 		{
+			"key": "UNIQUE_TRAINEE_INITIALS",
+			"value": "jd",
+			"type": "string"
+		},
+		{
+			"key": "TENANT_NAME",
+			"value": "training",
+			"type": "string"
+		},
+		{
 			"key": "BASE_URL",
-			"value": "https://fordlab.davra.com",
+			"value": "https://{{TENANT_NAME}}.davra.com",
+			"type": "string"
+		},
+		{
+			"key": "TRAINEE_ORG",
+			"value": "{{UNIQUE_TRAINEE_INITIALS}}-org",
 			"type": "string"
 		}
 	]
