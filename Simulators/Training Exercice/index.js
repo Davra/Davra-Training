@@ -5,24 +5,42 @@
  * to the Davra platform via the IoT Data API every 10 minutes.
  *
  * Configuration:
- * - Replace the USERNAME and PASSWORD with your Davra credentials.
- * - Set the TENANT to your Davra tenant name (used in the API URL).
- * - Provide the DEVICE_UUID for the device you're simulating data for.
- * - Set the METRIC_NAME to the appropriate metric name created in your platform.
+ * - Update the `.env` file with the following values:
+ *     - DEVICE_UUID: UUID of the device you're simulating data for
+ *     - METRIC_NAME: Metric name as defined in your Davra platform
+ *     - BEARER_TOKEN: Your Davra API token (used during local development)
+ *     - API_HOST: Full base URL of your tenant (e.g., https://training.davra.com)
+ *
+ * - When deployed as a Davra microservice, the script will automatically use
+ *   the token stored at /etc/connecthing-api/token and the internal API host
+ *   http://api.connecthing instead of values from the `.env` file.
  *
  * This script sends a random temperature value between 25°C and 35°C, with
  * occasional spikes between 50°C and 60°C to simulate overheating events.
  */
 
-// === Configuration - REPLACE THESE VALUES ===
-const USERNAME = "REPLACE_WITH_YOUR_USERNAME";
-const PASSWORD = "REPLACE_WITH_YOUR_PASSWORD";
-const TENANT = "REPLACE_WITH_YOUR_TENANT_NAME";                 // e.g. training
-const DEVICE_UUID = "REPLACE_WITH_YOUR_DEVICE_UUID";
-const METRIC_NAME = "REPLACE_WITH_YOUR_METRIC_NAME";            // e.g. jd.engine.temperature_celsius
+const { readFileSync } = require("fs");
+require("dotenv").config();
 
-const API_URL = `https://${TENANT}.davra.com/api/v1/iotdata`;   // e.g. https://training.davra.com/api/v1/iotdata
-const AUTH_HEADER = "Basic " + Buffer.from(`${USERNAME}:${PASSWORD}`).toString("base64");
+// === Configuration ===
+
+let apiUrl;
+let token;
+
+try {
+  // Try reading token from file (used when running inside a Davra microservice container)
+  apiUrl = "http://api.connecthing/api/v1/iotdata";
+  token = readFileSync("/etc/connecthing-api/token", "utf8").trim();
+  console.log("[INFO] Using microservice token from file");
+} catch (err) {
+  // Fallback to environment variables
+  apiUrl = `${process.env.API_HOST}/api/v1/iotdata`;
+  token = process.env.BEARER_TOKEN;
+  console.log("[INFO] Using environment token and host");
+}
+
+const DEVICE_UUID = process.env.DEVICE_UUID;
+const METRIC_NAME = process.env.METRIC_NAME;
 
 // === Simulation settings ===
 const SEND_INTERVAL_MS = 10 * 60 * 1000; // 10 minutes in milliseconds
@@ -57,10 +75,10 @@ function generatePayload(uuid, metricName, value) {
 // Send the data to Davra platform
 async function sendIoTData(payload) {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(apiUrl, {
       method: "PUT",
       headers: {
-        "Authorization": AUTH_HEADER,
+        "Authorization": "Bearer " + token,
         "Content-Type": "application/json"
       },
       body: JSON.stringify([payload])
@@ -71,7 +89,7 @@ async function sendIoTData(payload) {
       throw new Error(`HTTP ${response.status}: ${errorText}`);
     }
 
-    console.log(`Data sent: ${payload.UUID} - ${payload.name}: ${payload.value}`);
+    console.log(`Data sent to ${payload.UUID} (${payload.name}): ${payload.value}`);
   } catch (err) {
     console.error("Error sending IoT data:", err.message);
   }

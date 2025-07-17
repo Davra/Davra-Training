@@ -6,5 +6,9 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Davra Networks"
+  "author": "Davra Networks",
+  "dependencies": {
+    "@connecthing.io/connecthing-api": "~1.0.2",
+    "dotenv": "^17.2.0"
+  }
 }

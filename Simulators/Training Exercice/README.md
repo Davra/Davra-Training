@@ -25,7 +25,31 @@ git clone https://github.com/Davra/Davra-Training.git
 cd Davra-Training/Simulators/Training Exercise
 ```
 
-### 2. Install Dependencies
+### 2. Configure the Simulator
+
+This simulator uses environment variables to manage configuration.
+
+Update the `.env` file in the root of the project with your own values:
+
+| Variable      | Description                                                            |
+|---------------|------------------------------------------------------------------------|
+| API_HOST      | Full base URL of your Davra tenant (e.g., https://training.davra.com)  |
+| BEARER_TOKEN  | Bearer token used to authenticate requests to the Davra API            |
+| DEVICE_UUID   | UUID of the device you created in Davra                                |
+| METRIC_NAME   | Your metric name (e.g., fb.engine.temperature_celsius)                 |
+
+You'll find these lines in the `.env` file:
+
+```bash
+API_HOST=https://your-tenant-name.davra.com
+BEARER_TOKEN=your_token_here
+DEVICE_UUID=your_device_uuid_here
+METRIC_NAME=your_metric_name_here
+```
+
+If deployed as a microservice in Davra, the bearer token will be read automatically from `/etc/connecthing-api/token`. The `.env` token is only required for local development.
+
+### 3. Install Dependencies
 
 **Prerequisite:** Make sure you have **Node.js version 18 or higher** installed.  
 Check your version with `node -v`. If needed, update Node.js before continuing.
@@ -34,36 +58,12 @@ Check your version with `node -v`. If needed, update Node.js before continuing.
 npm install
 ```
 
-### 3. Configure the Simulator
-
-Open the `index.js` file and replace the following placeholders with your own values:
-
-| Variable       | Description                                                    |
-|----------------|----------------------------------------------------------------|
-| USERNAME       | Your Davra platform username                                   |
-| PASSWORD       | Your Davra platform password                                   |
-| TENANT         | Your tenant name (subdomain) in the Davra URL                  |
-| DEVICE_UUID    | UUID of the device you created in Davra                        |
-| METRIC_NAME    | Your metric name (e.g., fb.engine.temperature_celsius)         |
-
-You'll find these placeholder lines near the top of the file:
-
-```bash
-const USERNAME = "REPLACE_WITH_YOUR_USERNAME";
-const PASSWORD = "REPLACE_WITH_YOUR_PASSWORD";
-const TENANT = "REPLACE_WITH_YOUR_TENANT_NAME"; 
-const DEVICE_UUID = "REPLACE_WITH_YOUR_DEVICE_UUID";
-const METRIC_NAME = "REPLACE_WITH_YOUR_METRIC_NAME";
-```
-
-Update them accordingly before proceeding.
-
 ### 4. Run the Simulator Locally
 
 To test the simulator locally before containerizing:
 
 ```bash
-node index.js
+npm start
 ```
 
 This will send a temperature datapoint to the Davra platform every 10 minutes.  
