@@ -37,7 +37,7 @@ function simulateTemperature() {
     // 80% chance: normal range 25–35°C
     temperature = +(25 + Math.random() * 10).toFixed(1);
   }
-  if (temperature >= 40) {
+  if (temperature >= 50) {
     console.warn(`ALERT: Engine temperature spike! Temp = ${temperature}°C`);
   }
   return temperature;
