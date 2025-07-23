@@ -22,7 +22,7 @@ In this exercise, you will:
 
 ```bash
 git clone https://github.com/Davra/Davra-Training.git
-cd Davra-Training/Simulators/Training Exercise
+cd Davra-Training/Exercises/temperature-simulator
 ```
 
 ### 2. Configure the Simulator
