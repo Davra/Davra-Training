@@ -1,0 +1,15 @@
+{
+  "name": "kafka-listener",
+  "version": "1.0.0",
+  "description": "Node.js microservice that simulates engine temperature data and listens to Kafka updates, sending both to the Davra IoT platform.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Davra Networks",
+  "dependencies": {
+    "@connecthing.io/connecthing-api": "~1.0.2",
+    "dotenv": "^17.2.0",
+    "kafka-node": "^5.0.0"
+  }
+}

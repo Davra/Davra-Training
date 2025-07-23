@@ -1,5 +1,5 @@
 {
-  "name": "temp-simulator",
+  "name": "temperature-simulator",
   "version": "1.0.0",
   "description": "Node.js microservice that simulates temperature data and sends it to Davra platform.",
   "main": "index.js",

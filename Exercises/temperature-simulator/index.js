@@ -6,10 +6,10 @@
  *
  * Configuration:
  * - Update the `.env` file with the following values:
+ *     - API_HOST: Full base URL of your tenant (e.g., https://training.davra.com)
+ *     - BEARER_TOKEN: Your Davra API token (used during local development)
  *     - DEVICE_UUID: UUID of the device you're simulating data for
  *     - METRIC_NAME: Metric name as defined in your Davra platform
- *     - BEARER_TOKEN: Your Davra API token (used during local development)
- *     - API_HOST: Full base URL of your tenant (e.g., https://training.davra.com)
  *
  * - When deployed as a Davra microservice, the script will automatically use
  *   the token stored at /etc/connecthing-api/token and the internal API host
