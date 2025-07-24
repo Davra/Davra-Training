@@ -29,7 +29,7 @@
 
 require("dotenv").config();
 const { readFileSync } = require("fs");
-const kafka = require("kafka-node");
+const { Kafka } = require("kafkajs");
 
 // === 1. CONFIGURATION ===
 
@@ -50,6 +50,7 @@ try {
 
 const DEVICE_UUID = process.env.DEVICE_UUID;
 const METRIC_NAME = process.env.METRIC_NAME;
+const EVENT_NAME = process.env.EVENT_NAME;
 
 // === 2. TEMPERATURE SIMULATOR ===
 const SEND_INTERVAL_MS = 10 * 60 * 1000; // 10 minutes in milliseconds
@@ -107,61 +108,73 @@ async function sendIoTData(payload) {
 
 // Start the simulator loop
 function startTemperatureSimulation() {
-  const temp = simulateTemperature();
-  const payload = generatePayload(DEVICE_UUID, METRIC_NAME, temp, "datum");
-  sendIoTData(payload);
   setInterval(() => {
     const temp = simulateTemperature();
-    const payload = generatePayload(DEVICE_UUID, METRIC_NAME, temp, "datum");
+    const payload = generatePayload(DEVICE_UUID, METRIC_NAME, temp);
     sendIoTData(payload);
   }, SEND_INTERVAL_MS);
 }
 
 // === 3. KAFKA CONSUMER SETUP ===
-let lastDatumValue = null;
-const TLS_PATH = '/etc/davra/tls';
+let lastDatumValue = null;  // Used to detect changes
 
-function startKafkaListener() {
-  const ConsumerGroup = kafka.ConsumerGroup;
-  const consumer = new ConsumerGroup({
-    kafkaHost: process.env.KAFKA_HOST,
-    groupId: process.env.KAFKA_CONSUMER_GROUP_ID,
-    fromOffset: "earliest",
-    ssl: true,
-    sslOptions: {
-      key: readFileSync(`${TLS_PATH}/tls.key`),
-      cert: readFileSync(`${TLS_PATH}/tls.crt`),
-      ca: [readFileSync(`${TLS_PATH}/ca-cert`)],
-      rejectUnauthorized: false
+async function startKafkaListener() {
+
+  // Configure KafkaJS client
+  const kafka = new Kafka({
+    clientId: process.env.KAFKA_CONSUMER_GROUP_ID,
+    brokers: [process.env.KAFKA_HOST],
+    ssl: {
+      key: readFileSync("/etc/davra/tls/tls.key"),
+      cert: readFileSync("/etc/davra/tls/tls.crt"),
+      ca: [readFileSync("/etc/davra/tls/ca-cert")],
+      rejectUnauthorized: true,
+      checkServerIdentity: () => undefined,
     }
-  }, [process.env.IoT_DATA_TOPIC_NAME]);
-
-  consumer.on("error", function (err) {
-    console.error("[KAFKA] Consumer error:", err);
-    process.exit(1);
   });
 
-  consumer.on("message", function (message) {
-    try {
-      const datum = JSON.parse(message.value);
-      if (datum.name === METRIC_NAME) {
-        console.log(`[KAFKA] Received metric ${datum.name} = ${datum.value}`);
+  const consumer = kafka.consumer({ groupId: process.env.KAFKA_CONSUMER_GROUP_ID });
 
-        //if (datum.value !== lastDatumValue && (datum.value == 1 || datum.value == 2)) {
-        if (datum.value !== lastDatumValue) {
-          const value = {
-            newValue: datum.value,
-            oldValue: lastDatumValue
-          };
-          const payload = generatePayload(DEVICE_UUID, METRIC_NAME, value, "event");
-          sendIoTData(payload);
+  await consumer.connect();
+  console.log("[KAFKA] Consumer connected");
 
-          lastDatumValue = datum.value;
+  await consumer.subscribe({
+    topic: process.env.IoT_DATA_TOPIC_NAME,
+    fromBeginning: false,
+  });
+
+  await consumer.run({
+    eachMessage: async ({ topic, partition, message }) => {
+      try {
+        const datum = JSON.parse(message.value.toString());
+
+        // Only react to changes in the specific device and metric
+        if (
+          datum.UUID && datum.UUID === DEVICE_UUID &&
+          datum.name && datum.name === METRIC_NAME
+        ) {
+          console.log(`[KAFKA] Received metric ${datum.name} = ${datum.value}`);
+
+          if (JSON.stringify(datum.value) !== JSON.stringify(lastDatumValue)) {
+            const value = {
+              newValue: datum.value,
+              oldValue: lastDatumValue,
+            };
+
+            const payload = generatePayload(DEVICE_UUID, EVENT_NAME, value, "event");
+            await sendIoTData(payload);
+            lastDatumValue = datum.value;
+          }
         }
+      } catch (err) {
+        console.error("[KAFKA] Failed to parse message:", err.message);
       }
-    } catch (err) {
-      console.error("[KAFKA] Failed to parse message:", err.message);
-    }
+    },
+  });
+
+  // Optional lifecycle hooks
+  consumer.on("consumer.crash", async (event) => {
+    console.error("[KAFKA] Consumer crashed", event.payload.error);
   });
 }
 

@@ -36,7 +36,7 @@ Update the `.env` file in the root of the project with your own values:
 | API_HOST      | Full base URL of your Davra tenant (e.g., https://training.davra.com)  |
 | BEARER_TOKEN  | Bearer token used to authenticate requests to the Davra API            |
 | DEVICE_UUID   | UUID of the device you created in Davra                                |
-| METRIC_NAME   | Your metric name (e.g., fb.engine.temperature_celsius)                 |
+| METRIC_NAME   | Your metric name (e.g., jd.engine.temperature_celsius)                 |
 
 You'll find these lines in the `.env` file:
 

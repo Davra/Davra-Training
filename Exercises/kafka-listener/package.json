@@ -10,6 +10,6 @@
   "dependencies": {
     "@connecthing.io/connecthing-api": "~1.0.2",
     "dotenv": "^17.2.0",
-    "kafka-node": "^5.0.0"
+    "kafkajs": "^2.2.4"
   }
 }

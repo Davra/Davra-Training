@@ -19,8 +19,8 @@
  * occasional spikes between 50°C and 60°C to simulate overheating events.
  */
 
-const { readFileSync } = require("fs");
 require("dotenv").config();
+const { readFileSync } = require("fs");
 
 // === Configuration ===
 
