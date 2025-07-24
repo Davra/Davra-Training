@@ -99,20 +99,22 @@ async function sendIoTData(payload) {
       throw new Error(`HTTP ${response.status}: ${errorText}`);
     }
 
-    const sourceLabel = payload.msg_type === "event" ? "EVENT" : "SIMULATOR";
-    console.log(`[${sourceLabel}] Data sent to ${payload.UUID} (${payload.name})`, payload.value);
+    console.log(`[${payload.msg_type === "event" ? "EVENT" : "SIMULATOR"}] Data sent to ${payload.UUID} (${payload.name})`, payload.value);
   } catch (err) {
-    console.error("[SIMULATOR] Error sending IoT data:", err.message);
+    console.error(`[${payload.msg_type === "event" ? "EVENT" : "SIMULATOR"}] Error sending IoT data:`, err.message);
   }
 }
 
 // Start the simulator loop
 function startTemperatureSimulation() {
-  setInterval(() => {
+  const sendTemperature = () => {
     const temp = simulateTemperature();
-    const payload = generatePayload(DEVICE_UUID, METRIC_NAME, temp);
+    const payload = generatePayload(DEVICE_UUID, METRIC_NAME, temp, "datum");
     sendIoTData(payload);
-  }, SEND_INTERVAL_MS);
+  };
+
+  sendTemperature(); // Send immediately on startup
+  setInterval(sendTemperature, SEND_INTERVAL_MS); // Then at regular intervals
 }
 
 // === 3. KAFKA CONSUMER SETUP ===
