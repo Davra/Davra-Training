@@ -1,4 +1,4 @@
-# Simulator Training Exercise
+# Temperature Simulator Exercise
 
 This folder contains a simple Node.js-based microservice used as part of the **Basic Modules – Final Exercise** in the Davra training program.
 
@@ -42,9 +42,9 @@ You'll find these lines in the `.env` file:
 
 ```bash
 API_HOST=https://your-tenant-name.davra.com
-BEARER_TOKEN=your_token_here
-DEVICE_UUID=your_device_uuid_here
-METRIC_NAME=your_metric_name_here
+BEARER_TOKEN=your-token-here
+DEVICE_UUID=your-device-uuid-here
+METRIC_NAME=your-metric-name-here
 ```
 
 If deployed as a microservice in Davra, the bearer token will be read automatically from `/etc/connecthing-api/token`. The `.env` token is only required for local development.
@@ -75,7 +75,7 @@ You can adjust the interval in the code if needed.
 ### 1. Build the Docker Image
 
 ```bash
-docker build -t your-docker-hub-username/temperature-simulator:latest .
+docker build -t <your-docker-hub-username>/temperature-simulator:1.0.0 .
 ```
 
 Davra’s platform requires Docker images to be built for the `linux/amd64` **(x86_64)** architecture.
@@ -83,14 +83,14 @@ Davra’s platform requires Docker images to be built for the `linux/amd64` **(x
 If you’re using a Mac with Apple Silicon (M1/M2), you **must** add the `--platform` flag when building your image:
 
 ```bash
-docker build --platform linux/amd64 -t your-docker-hub-username/temperature-simulator:latest .
+docker build --platform linux/amd64 -t <your-docker-hub-username>/temperature-simulator:1.0.0 .
 ```
 
 ### 2. Push to Docker Hub
 
 ```bash
 docker login
-docker push your-docker-hub-username/temperature-simulator:latest
+docker push <your-docker-hub-username>/temperature-simulator:1.0.0
 ```
 
-Replace `your-docker-hub-username` with your actual Docker Hub username, written in lowercase.
+Replace `<your-docker-hub-username>` with your actual Docker Hub username, written in lowercase.
